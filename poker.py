@@ -1,4 +1,3 @@
-
 "Implementation of a poker game"
 def poker(hands):
   "Return the best hand: poker([hand,...]) => hand"
@@ -19,6 +18,7 @@ def test():
   assert poker([fk]) == fk, "Assert that one player always has the winning hand"
   assert poker([fh,fh]) == fh, "Assert that two times full house produces full house as the winning hand"
   assert poker([sf for x in xrange(0,100)]) == sf
+  assert poker([sf] + 99*[fk]) == sf
   return "tests pass."
 
 print test()
