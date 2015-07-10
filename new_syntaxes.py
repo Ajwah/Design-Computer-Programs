@@ -8,3 +8,6 @@ sf = "6C 7C 8C 9C TC".split()
 print [sf] + 99*[sf]
 "This syntax will create one list of a hundred repetitions of the sequence contained in sf"
 print 99*sf
+
+a = (1,2,3)
+print a[1]
