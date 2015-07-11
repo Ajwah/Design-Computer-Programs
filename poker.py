@@ -3,6 +3,12 @@ def poker(hands):
   "Return the best hand: poker([hand,...]) => hand"
   return max(hands,hand_rank)
 
+def card_ranks(cards):
+    "Return a list of the ranks, sorted with higher first."
+    ranks = [r for r,s in cards]
+    ranks.sort(reverse=True)
+    return ranks
+
 def hand_rank(hand):
   "Determine the rank of the card"
   """
@@ -38,13 +44,14 @@ def hand_rank(hand):
   else:                                          # high card
       return (0, ranks)
 
-
-
 def test():
   "Test cases for the functions in poker program."
   sf = "6C 7C 8C 9C TC".split()
   fk = "9D 9H 9S 9C 7D".split()
   fh = "TD TC TH 7C 7D".split()
+  assert card_ranks(sf) == [10,9,8,7,6]
+  assert card_ranks(fk) == [9,9,9,9,7]
+  assert card_ranks(fh) == [10,10,10,7,7]
   assert poker([sf,fk,fh]) == sf, "Assert that straight flush is the winning hand"
   assert poker([fk,fh]) == fk, "Assert that four of a kind is the winning hand"
   assert poker([fh,fh]) == fh, "Assert that two times full house produces full house as the winning hand"

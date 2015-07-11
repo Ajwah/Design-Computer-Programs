@@ -9,5 +9,8 @@ print [sf] + 99*[sf]
 "This syntax will create one list of a hundred repetitions of the sequence contained in sf"
 print 99*sf
 
-a = (1,2,3)
-print a[1]
+"This syntax allows for a very short and efficient conversion of string values to numbers"
+h1 = "6C 7C 8C 9C TC".split()
+h2 = ['AC', '3D', '4S', 'KH']
+print ["--23456789TJQKA".index(r) for r,s in h1]
+print ["--23456789TJQKA".index(r) for r,s in h2]
