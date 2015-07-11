@@ -41,3 +41,12 @@ def straight(ranks):
     return 5*ranks[0] == sum(ranks) + 10 and len(ranks) == 5
 
 print straight([9, 8, 7, 6, 5])
+
+
+def kind(n, ranks):
+    """Return the first rank that this hand has exactly n of.
+    Return None if there is no n-of-a-kind in the hand."""
+    """My original implementation which I prefer over the instructor's
+    one which utilized a for loop instead"""
+    return reduce(lambda a,x: x if (ranks.count(x) == n) else a, ranks, None)
+print kind(3, [9, 8, 7, 9, 8])
