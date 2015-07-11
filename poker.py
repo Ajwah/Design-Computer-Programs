@@ -3,9 +3,9 @@ def poker(hands):
   "Return the best hand: poker([hand,...]) => hand"
   return max(hands,hand_rank)
 
-def card_ranks(cards):
+def card_ranks(hand):
     "Return a list of the ranks, sorted with higher first."
-    ranks = [r for r,s in cards]
+    ranks = ["--23456789TJQKA".index(r) for r,s in hand]
     ranks.sort(reverse=True)
     return ranks
 
@@ -44,6 +44,17 @@ def hand_rank(hand):
   else:                                          # high card
       return (0, ranks)
 
+def straight(ranks):
+    "Return True if the ordered ranks form a 5-card straight."
+    # Your code here.
+    return 5*ranks[0] == sum(ranks) + 10 and len(ranks) == 5
+
+def flush(hand):
+    "Return True if all the cards have the same suit."
+    # Your code here.
+    suits = [s for r,s in hand]
+    return len(set(suits)) == 1
+
 def test():
   "Test cases for the functions in poker program."
   sf = "6C 7C 8C 9C TC".split()
@@ -52,6 +63,11 @@ def test():
   assert card_ranks(sf) == [10,9,8,7,6]
   assert card_ranks(fk) == [9,9,9,9,7]
   assert card_ranks(fh) == [10,10,10,7,7]
+  assert straight([9, 8, 7, 6, 5]) == True
+  assert straight([9, 8, 8, 6, 5]) == False
+  assert flush(sf) == True
+  assert flush(fk) == False
+  """
   assert poker([sf,fk,fh]) == sf, "Assert that straight flush is the winning hand"
   assert poker([fk,fh]) == fk, "Assert that four of a kind is the winning hand"
   assert poker([fh,fh]) == fh, "Assert that two times full house produces full house as the winning hand"
@@ -59,6 +75,6 @@ def test():
   assert poker([fh,fh]) == fh, "Assert that two times full house produces full house as the winning hand"
   assert poker([sf for x in xrange(0,100)]) == sf
   assert poker([sf] + 99*[fk]) == sf
+  """
   return "tests pass."
-
 print test()
