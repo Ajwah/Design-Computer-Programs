@@ -17,7 +17,7 @@ def poker(hands):
 def deal(numhands, n=5, deck=mydeck):
     "Deal numhands players with n cards each from a given deck"
     random.shuffle(deck)
-    return [[deck[j*numhands + i] for i in xrange(0,n)] for j in xrange(0,numhands)]
+    return [deck[n*i:n*(i+1)] for i in range(numhands)]
 
 def allmax(iterable, key=None):
   "allmax accounts for duplicates as well by returning a list thereof to determine ties."

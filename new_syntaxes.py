@@ -74,6 +74,9 @@ print m([1,2,3,3,3,3,3,2])
 mydeck = [r+s for r in '23456789TJQKA' for s in 'SHDC']
 
 def deal(numhands, n=5, deck=mydeck):
+    """Improve on my implementation by using a slice.
+      return [[deck[j*numhands + i] for i in xrange(0,n)] for j in xrange(0,numhands)]
+    """
     random.shuffle(deck)
-    return [[deck[j*numhands + i] for i in xrange(0,n)] for j in xrange(0,numhands)]
-print deal(4,5,mydeck)
+    return [deck[n*i:n*(i+1)] for i in range(numhands)]
+print deal(10)
