@@ -1,3 +1,5 @@
+import random # this will be a useful library for shuffling
+
 "I learned about docstrings which can be used to document code. See docstrings.py for more info"
 
 "The function split() converts a string into a list of characters"
@@ -37,7 +39,6 @@ def straight(ranks):
       I retained my original implementation, however this one is cool as well:
       return max(ranks) - min(ranks) == 4 and len(set(ranks)) == 5
     """
-    # Your code here.
     return 5*ranks[0] == sum(ranks) + 10 and len(ranks) == 5
 
 print straight([9, 8, 7, 6, 5])
@@ -56,9 +57,16 @@ print kind(2, [9, 8, 7, 6, 5])
 def two_pair(ranks):
     """If there are two pair, return the two ranks as a
     tuple: (highest, lowest); otherwise return None."""
-    # Your code here.
     h = kind(2, ranks)
     l = kind(2, list(reversed(ranks)))
     return (h,l) if h>l else None
 
 print two_pair([9, 8, 7, 1, 8])
+
+def m(v):
+  "max requires explicit usage of key= parameter. Sufficing on lambda x:x will not work"
+  ma = max(v, key=lambda x:x)
+  return filter(lambda d: d == ma, v)
+
+print m([1,2,3,3,3,3,3,2])
+
