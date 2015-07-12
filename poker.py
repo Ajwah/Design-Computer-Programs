@@ -1,7 +1,7 @@
 "Implementation of a poker game"
 def poker(hands):
   "Return the best hand: poker([hand,...]) => hand"
-  return max(hands,hand_rank)
+  return max(hands, key=hand_rank)
 
 def card_ranks(hand):
     "Return a list of the ranks, sorted with higher first."
@@ -60,7 +60,15 @@ def kind(n, ranks):
     Return None if there is no n-of-a-kind in the hand."""
     #
     # Your code here
-    return reduce(lambda a,x: x if (ranks.count(x) == n) else a, ranks, None)
+    return reduce(lambda a,x: x if (ranks.count(x) == n) else a, list(reversed(ranks)), None)
+
+def two_pair(ranks):
+    """If there are two pair, return the two ranks as a
+    tuple: (highest, lowest); otherwise return None."""
+    # Your code here.
+    h = kind(2, ranks)
+    l = kind(2, list(reversed(ranks)))
+    return (h,l) if h>l else None
 
 def test():
   "Test cases for the functions in poker program."
@@ -81,7 +89,6 @@ def test():
   assert straight([9, 8, 8, 6, 5]) == False
   assert flush(sf) == True
   assert flush(fk) == False
-  """
   assert poker([sf,fk,fh]) == sf, "Assert that straight flush is the winning hand"
   assert poker([fk,fh]) == fk, "Assert that four of a kind is the winning hand"
   assert poker([fh,fh]) == fh, "Assert that two times full house produces full house as the winning hand"
@@ -89,6 +96,6 @@ def test():
   assert poker([fh,fh]) == fh, "Assert that two times full house produces full house as the winning hand"
   assert poker([sf for x in xrange(0,100)]) == sf
   assert poker([sf] + 99*[fk]) == sf
-  """
+
   return "tests pass."
 print test()

@@ -47,6 +47,18 @@ def kind(n, ranks):
     """Return the first rank that this hand has exactly n of.
     Return None if there is no n-of-a-kind in the hand."""
     """My original implementation which I prefer over the instructor's
-    one which utilized a for loop instead"""
-    return reduce(lambda a,x: x if (ranks.count(x) == n) else a, ranks, None)
-print kind(3, [9, 8, 7, 9, 8])
+    one which utilized a for loop instead. However, I require to reverse the list first
+    to ensure I get the biggest pair first"""
+    return reduce(lambda a,x: x if (ranks.count(x) == n) else a, list(reversed(ranks)), None)
+print kind(2, [9, 8, 7, 6, 5])
+
+
+def two_pair(ranks):
+    """If there are two pair, return the two ranks as a
+    tuple: (highest, lowest); otherwise return None."""
+    # Your code here.
+    h = kind(2, ranks)
+    l = kind(2, list(reversed(ranks)))
+    return (h,l) if h>l else None
+
+print two_pair([9, 8, 7, 1, 8])
