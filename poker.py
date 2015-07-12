@@ -1,4 +1,9 @@
+import random
 "Implementation of a poker game"
+
+"Cartesion product with list comprehension"
+mydeck = [r+s for r in '23456789TJQKA' for s in 'SHDC']
+
 def poker(hands):
   "Return the best hand: poker([hand,...]) => hand"
   """The way max works here is by applying the function hand_rank over every hand in hands.
@@ -9,7 +14,13 @@ def poker(hands):
   """
   return allmax(hands, key=hand_rank)
 
+def deal(numhands, n=5, deck=mydeck):
+    "Deal numhands players with n cards each from a given deck"
+    random.shuffle(deck)
+    return [[deck[j*numhands + i] for i in xrange(0,n)] for j in xrange(0,numhands)]
+
 def allmax(iterable, key=None):
+  "allmax accounts for duplicates as well by returning a list thereof to determine ties."
   m = max(iterable, key=key)
   return filter(lambda d: d == m, iterable)
 
