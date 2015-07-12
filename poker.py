@@ -1,13 +1,19 @@
 "Implementation of a poker game"
 def poker(hands):
   "Return the best hand: poker([hand,...]) => hand"
+  """The way max works here is by applying the function hand_rank over every hand in hands.
+  This function in turn returns a tuple, the first element of which is an int betwen 0-8.
+  By default, max will be done with regards to the first element. Only in case of match,
+  the second element will be considered.
+  More info: http://stackoverflow.com/questions/18296755/python-max-function-using-key-and-lambda-expression
+  """
   return max(hands, key=hand_rank)
 
 def card_ranks(hand):
     "Return a list of the ranks, sorted with higher first."
     ranks = ["--23456789TJQKA".index(r) for r,s in hand]
     ranks.sort(reverse=True)
-    return ranks
+    return [5,4,3,2,1] if ranks == [14,5,4,3,2] else ranks
 
 def hand_rank(hand):
   "Determine the rank of the card"
@@ -78,6 +84,8 @@ def test():
   tp = "5S 5D 9H 9C 6S".split() # Two pairs
   fkranks = card_ranks(fk)
   tpranks = card_ranks(tp)
+  al = "AC 2D 4H 3D 5S".split() # Ace-Low Straight
+  assert straight(card_ranks(al)) == True
   assert kind(4, fkranks) == 9
   assert kind(3, fkranks) == None
   assert kind(2, fkranks) == None
@@ -85,6 +93,7 @@ def test():
   assert card_ranks(sf) == [10,9,8,7,6]
   assert card_ranks(fk) == [9,9,9,9,7]
   assert card_ranks(fh) == [10,10,10,7,7]
+
   assert straight([9, 8, 7, 6, 5]) == True
   assert straight([9, 8, 8, 6, 5]) == False
   assert flush(sf) == True
