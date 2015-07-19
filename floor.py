@@ -32,3 +32,19 @@ def floor_puzzle():
       return [Hopper, Kay, Liskov, Perlis, Ritchie]
 
 print floor_puzzle()
+
+def floor_p_improved():
+  def adjacent(fl1,fl2): return abs(fl1-fl2) == 1
+  floors = bottom, _, _, _, top = [1,2,3,4,5]
+  fl_perm = list(itertools.permutations(floors))
+  for (Hopper, Kay, Liskov, Perlis, Ritchie) in fl_perm:
+    if (Hopper is not top
+    and Kay is not bottom
+    and Liskov is not top
+    and Liskov is not bottom
+    and Perlis > Kay
+    and not adjacent(Ritchie,Liskov)
+    and not adjacent(Liskov, Kay)):
+      return [Hopper, Kay, Liskov, Perlis, Ritchie]
+
+print floor_p_improved()
