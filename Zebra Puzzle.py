@@ -10,6 +10,20 @@ def timedCall(fn, *args):
   t1 = time.clock()
   return t1-t0, r
 
+def timedCalls(n,fn,*args):
+  def average(nums):
+    return sum(nums)/float(len(nums))
+
+  'Repeatedly call function n amount of times if n is int else for n seconds if n is float'
+  if isinstance(n,int):
+    times = [timedCall(fn,*args)[0] for _ in range(n)]
+  else:
+    times = []
+    while sum(times)<n:
+      times.append(timedCall(fn,*args)[0])
+  return min(times), average(times), max(times), sum(times)
+
+
 def zebra_puzzle():
   'Solve Zebra Puzzle completely and return solution for output'
   #List of local variables to be excluded from listing
@@ -46,7 +60,9 @@ def zebra_puzzle():
   return result
 
 def output():
+  n = 1000
   t, result = timedCall(zebra_puzzle)
+  minT, avT, maxT, totT = timedCalls(n, zebra_puzzle)
   for row in result:
     h = 0
     s = ''
@@ -59,5 +75,10 @@ def output():
         s += ' - ' + i[1]
     print s
   print 'Time to execute entire function: ', t
+  print 'Minimum Time to execute function %s times: '%n, minT
+  print 'Average Time to execute function %s times: '%n, avT
+  print 'Maximum Time to execute function %s times: '%n, maxT
+  print 'Total Time to execute function %s times: '%n, totT
+
 
 output()

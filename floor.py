@@ -35,6 +35,7 @@ print floor_puzzle()
 
 def floor_p_improved():
   def adjacent(fl1,fl2): return abs(fl1-fl2) == 1
+  #I love this expression
   floors = bottom, _, _, _, top = [1,2,3,4,5]
   fl_perm = list(itertools.permutations(floors))
   for (Hopper, Kay, Liskov, Perlis, Ritchie) in fl_perm:
